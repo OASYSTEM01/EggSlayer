@@ -35,7 +35,7 @@ while True:
     # ตรวจจับวัตถุจาก results[0].boxes
     for box in results[0].boxes:
         cls = int(box.cls[0])
-        if cls == 0 :  
+        if cls == 0 :  # สมมติ class 0 คือ "คน"
             arduino.write(b'1')
         else:
             arduino.write(b'0')
