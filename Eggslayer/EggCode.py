@@ -3,7 +3,7 @@ import torch
 import serial
 
 # โหลดโมเดล YOLO
-model = torch.hub.load('ultralytics/yolov11', 'custom', path='best.pt')
+model = torch.hub.load('ultralytics/yolov', 'custom', path='best.pt')
 
 # เปิดกล้อง
 cap = cv2.VideoCapture(0)
