@@ -1,0 +1,42 @@
+#include <Servo.h>
+
+Servo myServo;
+const int motorPin = 8;  // ขา digital ที่ต่อกับมอเตอร์ผ่านรีเลย์หรือทรานซิสเตอร์
+int incomingData = -1;
+
+void setup() {
+  Serial.begin(9600);
+
+  myServo.attach(9);         // ขา PWM ที่ต่อกับ Servo
+  myServo.write(90);         // หมุนไปที่ 90 องศา
+  delay(2000);               // รอ 2 วินาที
+
+  digitalWrite(motorPin, HIGH);  // มอเตอร์ทำงาน
+  pinMode(motorPin, OUTPUT);
+  delay(2000);               // หมุน 2 วินาที
+  digitalWrite(motorPin, LOW);   // ปิดมอเตอร์
+}
+
+void loop() {
+  if (Serial.available() > 0) {
+    incomingData = Serial.read();
+
+    if (incomingData == '0') {
+      myServo.write(120);           // หมุนไปที่ 120 องศา
+      delay(500);
+      digitalWrite(motorPin, HIGH); // มอเตอร์ทำงาน
+      delay(2000);                  // หมุน 2 วิ
+      digitalWrite(motorPin, LOW);  // ปิดมอเตอร์
+      myServo.write(90);            // กลับมา 90 องศา
+    }
+
+    else if (incomingData == '1') {
+      myServo.write(60);            // หมุนไปที่ 60 องศา
+      delay(500);
+      digitalWrite(motorPin, HIGH); // มอเตอร์ทำงาน
+      delay(2000);                  // หมุน 2 วิ
+      digitalWrite(motorPin, LOW);  // ปิดมอเตอร์
+      myServo.write(90);            // กลับมา 90 องศา
+    }
+  }
+}

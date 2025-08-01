@@ -9,7 +9,7 @@ model = YOLO('C:/Users/Focus/Desktop/EggSlayer/Eggslayer/my_model/train/weights/
 # เปิดกล้อง
 cap = cv2.VideoCapture(0)
 
-# เชื่อมต่อกับ Arduino
+# เชื่อมต่อกับ Arduino แบบอัตโนมัติ
 ports = list(serial.tools.list_ports.comports())
 for p in ports:
      if "Arduino" in p.description:
@@ -35,7 +35,7 @@ while True:
     # ตรวจจับวัตถุจาก results[0].boxes
     for box in results[0].boxes:
         cls = int(box.cls[0])
-        if cls == 0 :  # สมมติ class 0 คือ "คน"
+        if cls == 0 :  
             arduino.write(b'1')
         else:
             arduino.write(b'0')
